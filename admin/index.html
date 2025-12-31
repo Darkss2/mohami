@@ -4,12 +4,12 @@
   <meta charset="utf-8" />
   <title>Admin</title>
 
-  <!-- REQUIRED FOR LOGIN -->
+  <!-- Netlify Identity (required for login) -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-
-  <!-- CMS -->
-  <script src="https://unpkg.com/decap-cms@latest/dist/decap-cms.js"></script>
 </head>
+
 <body>
+  <!-- Decap CMS (must load AFTER body) -->
+  <script src="https://unpkg.com/decap-cms@latest/dist/decap-cms.js"></script>
 </body>
 </html>
