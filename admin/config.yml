@@ -1,5 +1,3 @@
-local_backend: false
-
 backend:
   name: git-gateway
   branch: main
@@ -7,9 +5,73 @@ backend:
 media_folder: "uploads"
 public_folder: "/uploads"
 
+slug:
+  encoding: "ascii"
+  clean_accents: true
+
 collections:
-  - name: "site"
-    label: "Site Content"
+  # 1. Global Settings (The "Control Panel")
+  - name: "settings"
+    label: "⚙️ Global Settings"
+    files:
+      - file: "content/settings.json"
+        label: "Site Configuration"
+        name: "config"
+        fields:
+          - label: "Order System Mode"
+            name: "order_mode"
+            widget: "select"
+            options: 
+              - { label: "Standard (Formspree Email)", value: "formspree" }
+              - { label: "WhatsApp Direct", value: "whatsapp" }
+              - { label: "Delivery Company API (Yalidine/Echylia)", value: "delivery_api" }
+            default: "formspree"
+            hint: "Select how you want to receive orders."
+
+          - label: "WhatsApp Number"
+            name: "whatsapp_number"
+            widget: "string"
+            default: "213793726558"
+            hint: "Format: 213xxxxxxxxx (No +)"
+
+          - label: "Formspree Endpoint"
+            name: "formspree_url"
+            widget: "string"
+            default: "https://formspree.io/f/your-form-id"
+            required: false
+
+          - label: "Delivery API Configuration"
+            name: "api_config"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "API Key", name: "api_key", widget: "string", required: false }
+              - { label: "API Token", name: "api_token", widget: "string", required: false }
+              - { label: "Endpoint URL", name: "api_url", widget: "string", default: "https://api.yalidine.com/v1/parcels", required: false }
+
+  # 2. Products & Services (Shopify-like)
+  - name: "products"
+    label: "📦 Products & Services"
+    files:
+      - file: "content/products.json"
+        label: "Product List"
+        name: "products"
+        fields:
+          - label: "All Products"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "ID", name: "id", widget: "uuid" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Price (DZD)", name: "price", widget: "number" }
+              - { label: "Category", name: "category", widget: "select", options: ["Legal Consultation", "Administrative Writing", "Company Setup", "Translation", "Other"] }
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Featured on Homepage?", name: "featured", widget: "boolean", default: false }
+
+  # 3. Homepage Content
+  - name: "pages"
+    label: "📄 Page Content"
     files:
       - file: "content/site.json"
         label: "Homepage"
