@@ -1,0 +1,31 @@
+{
+  "items": [
+    {
+      "id": "prod-001",
+      "title": "استشارة قانونية فورية",
+      "price": 2000,
+      "category": "Legal Consultation",
+      "description": "استشارة لمدة 30 دقيقة عبر الهاتف أو حضورياً لمناقشة قضيتك.",
+      "featured": true,
+      "image": "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "prod-002",
+      "title": "تأسيس سجل تجاري",
+      "price": 15000,
+      "category": "Company Setup",
+      "description": "ملف كامل لإنشاء شركتك الناشئة مع كافة الإجراءات الإدارية.",
+      "featured": true,
+      "image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "prod-003",
+      "title": "تحرير شكوى رسمية",
+      "price": 3000,
+      "category": "Administrative Writing",
+      "description": "كتابة شكوى رسمية موجهة لوكيل الجمهورية أو الإدارات العمومية.",
+      "featured": false,
+      "image": "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=80"
+    }
+  ]
+}
