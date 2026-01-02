@@ -1,5 +1,5 @@
 {
-  "order_mode": "delivery_api",
+  "order_mode": "formspree",
   "whatsapp_number": "213",
   "formspree_url": "https://formspree.io/f/xeeoqezj",
   "api_config": {
