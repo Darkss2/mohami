@@ -1,6 +1,6 @@
 {
-  "order_mode": "formspree",
-  "whatsapp_number": "213793726558",
+  "order_mode": "whatsapp",
+  "whatsapp_number": "213",
   "formspree_url": "https://formspree.io/f/xeeoqezj",
   "api_config": {
     "api_key": "",
