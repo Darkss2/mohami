@@ -26,6 +26,14 @@
       "description": "كتابة شكوى رسمية موجهة لوكيل الجمهورية أو الإدارات العمومية.",
       "featured": false,
       "image": "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "featured": true,
+      "title": "3omar",
+      "price": 2998,
+      "category": "Other",
+      "image": "/uploads/naba-digital.png",
+      "description": "good ass"
     }
   ]
 }
