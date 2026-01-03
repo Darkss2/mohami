@@ -3,24 +3,82 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Dashboard | Nabra Dziriya</title>
+  <title>Advanced Dashboard | Admin</title>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  
+  <style>
+    /* 1. CUSTOM UI THEME OVERRIDE */
+    /* This makes the actual CMS interface look premium */
+    [class^="AppHeader-"] {
+      background-color: #111827 !important; /* Dark Slate Header */
+      border-bottom: 1px solid #374151 !important;
+    }
+    [class^="Sidebar-"] {
+      background-color: #f9fafb !important;
+      border-right: 1px solid #e5e7eb !important;
+    }
+    [class^="Card-"] {
+      border-radius: 12px !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+      transition: transform 0.2s ease;
+    }
+    [class^="Card-"]:hover {
+      transform: translateY(-2px);
+    }
+    button {
+      border-radius: 8px !important;
+      text-transform: none !important;
+      font-weight: 600 !important;
+    }
+  </style>
 </head>
 <body>
-  <!-- Include the script that builds the page and powers Decap CMS -->
   <script src="https://unpkg.com/decap-cms@latest/dist/decap-cms.js"></script>
-  
-  <!-- Register Netlify Identity for Login -->
+
   <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
-    }
+    // 2. REGISTER PREMIUM FONTS
+    CMS.registerPreviewStyle("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap");
+
+    // 3. THE ADVANCED PREVIEW COMPONENT
+    var AdvancedPreview = createClass({
+      render: function() {
+        var entry = this.props.entry;
+        var image = entry.getIn(['data', 'image']) || entry.getIn(['data', 'thumbnail']);
+        var bg = this.props.getAsset(image);
+        var title = entry.getIn(['data', 'title']) || entry.getIn(['data', 'name']) || "Untitled Item";
+        var price = entry.getIn(['data', 'price']) || "0.00";
+        var body = this.props.widgetFor('body') || this.props.widgetFor('description');
+
+        // Layout Styles
+        var ui = {
+          container: { fontFamily: '"Plus Jakarta Sans", sans-serif', padding: '40px', background: '#f3f4f6', minHeight: '100vh' },
+          badge: { display: 'inline-block', padding: '4px 12px', background: '#dbeafe', color: '#1e40af', borderRadius: '20px', fontSize: '12px', fontWeight: '700', marginBottom: '16px' },
+          card: { background: '#ffffff', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)', maxWidth: '500px', margin: '0 auto' },
+          img: { width: '100%', height: '300px', objectFit: 'cover' },
+          info: { padding: '32px' },
+          title: { fontSize: '28px', color: '#111827', margin: '0 0 8px 0', letterSpacing: '-0.025em' },
+          price: { fontSize: '24px', fontWeight: '700', color: '#059669', marginBottom: '20px' },
+          content: { color: '#4b5563', lineHeight: '1.7', fontSize: '16px', borderTop: '1px solid #f3f4f6', paddingTop: '20px' }
+        };
+
+        return h('div', { style: ui.container },
+          h('div', { style: ui.card },
+            h('img', { src: bg ? bg.toString() : '', style: ui.img }),
+            h('div', { style: ui.info },
+              h('span', { style: ui.badge }, "LIVE PREVIEW"),
+              h('h1', { style: ui.title }, title),
+              h('div', { style: ui.price }, "$" + price),
+              h('div', { style: ui.content }, body)
+            )
+          )
+        );
+      }
+    });
+
+    // 4. APPLY TO YOUR COLLECTIONS
+    // Change "products" and "site" to match your config.yml names
+    CMS.registerPreviewTemplate("products", AdvancedPreview);
+    CMS.registerPreviewTemplate("product", AdvancedPreview);
   </script>
 </body>
 </html>
