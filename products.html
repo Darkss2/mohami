@@ -23,7 +23,7 @@ tailwind.config = {
 
 <body class="bg-gray-50 font-sans">
 
-<!-- NAV -->
+<!-- NAVBAR -->
 <nav class="bg-white shadow sticky top-0 z-50">
   <div class="container mx-auto px-4 py-4 flex justify-between items-center">
     <a href="index.html" class="flex gap-2 items-center">
@@ -44,7 +44,7 @@ tailwind.config = {
   <h1 class="text-3xl font-bold">الخدمات والأسعار</h1>
 </header>
 
-<!-- CONTENT -->
+<!-- PRODUCTS -->
 <main class="container mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-6" id="products-grid">
   <p class="col-span-full text-center text-gray-400">جاري التحميل…</p>
 </main>
@@ -56,7 +56,7 @@ tailwind.config = {
     <button onclick="toggleCart()"><i class="fa-solid fa-xmark"></i></button>
   </div>
 
-  <div id="cart-items" class="flex-1 p-4 space-y-3"></div>
+  <div id="cart-items" class="flex-1 p-4 space-y-3 text-sm"></div>
 
   <div class="p-4 border-t">
     <div class="flex justify-between font-bold mb-3">
@@ -96,7 +96,7 @@ tailwind.config = {
 <label class="border p-3 rounded cursor-pointer space-y-2">
 <div class="flex gap-2 items-center">
 <input type="radio" name="pay" value="chargily">
-<span class="font-bold">💳 الدفع الإلكتروني</span>
+<span class="font-bold">💳 الدفع الإلكتروني (CIB / الذهبية)</span>
 </div>
 <div class="flex gap-4">
 <img class="h-8" src="https://upload.wikimedia.org/wikipedia/commons/2/2a/CIB_Algeria_logo.png">
@@ -115,6 +115,7 @@ tailwind.config = {
 <script>
 let products=[], cart=[];
 
+// LOAD PRODUCTS
 fetch('/content/products.json')
 .then(r=>r.json())
 .then(d=>{
@@ -150,7 +151,8 @@ cart.map(i=>`<div>${i.title} - ${i.price} د.ج</div>`).join('');
 
 function toggleCart(force){
 const c=document.getElementById('cart');
-c.classList.toggle('-translate-x-full',!force && !c.classList.contains('-translate-x-full'));
+if(force) c.classList.remove('-translate-x-full');
+else c.classList.toggle('-translate-x-full');
 }
 
 function openCheckout(){
@@ -163,17 +165,23 @@ async function confirmOrder(){
 const method=document.querySelector('input[name="pay"]:checked').value;
 const total=cart.reduce((s,i)=>s+i.price,0);
 
+// CHARGILY PAYMENT
 if(method==="chargily"){
 const r=await fetch('/.netlify/functions/chargily-payment',{
 method:'POST',
 headers:{'Content-Type':'application/json'},
-body:JSON.stringify({amount:total})
+body:JSON.stringify({ total })   // ✅ FIXED HERE
 });
 const d=await r.json();
+if(d.checkout_url){
 window.location.href=d.checkout_url;
+}else{
+alert('فشل إنشاء عملية الدفع');
+}
 return;
 }
 
+// OTHER METHODS (SIMULATION)
 alert('تم إرسال الطلب بالطريقة المختارة');
 }
 </script>
