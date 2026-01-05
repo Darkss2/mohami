@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>خدماتنا | Nabra Dziriya</title>
+<title>الخدمات | Nabra Dziriya</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -14,7 +14,13 @@ tailwind.config = {
   theme: {
     extend: {
       fontFamily: { sans: ['Cairo','sans-serif'] },
-      colors: { brand:{ primary:'#1e3a8a', gold:'#fbbf24', dark:'#0f172a'} }
+      colors: {
+        brand:{
+          primary:'#1e3a8a',
+          gold:'#fbbf24',
+          dark:'#0f172a'
+        }
+      }
     }
   }
 }
@@ -23,40 +29,34 @@ tailwind.config = {
 
 <body class="bg-gray-50 font-sans">
 
-<!-- NAVBAR -->
+<!-- NAV -->
 <nav class="bg-white shadow sticky top-0 z-50">
   <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-    <a href="index.html" class="flex gap-2 items-center">
-      <div class="w-10 h-10 bg-brand-gold rounded-lg flex items-center justify-center text-white">
-        <i class="fa-solid fa-scale-balanced"></i>
-      </div>
-      <span class="font-bold text-brand-primary">نبرة جزائرية</span>
-    </a>
-    <button onclick="toggleCart()" class="relative text-xl text-brand-primary">
+    <a href="index.html" class="font-bold text-brand-primary text-lg">نبرة جزائرية</a>
+    <button onclick="toggleCart()" class="relative text-xl">
       <i class="fa-solid fa-cart-shopping"></i>
       <span id="cart-badge" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center opacity-0">0</span>
     </button>
   </div>
 </nav>
 
-<!-- HEADER -->
 <header class="bg-brand-primary text-white py-12 text-center">
   <h1 class="text-3xl font-bold">الخدمات والأسعار</h1>
 </header>
 
 <!-- PRODUCTS -->
-<main class="container mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-6" id="products-grid">
+<main id="products-grid" class="container mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-6">
   <p class="col-span-full text-center text-gray-400">جاري التحميل…</p>
 </main>
 
 <!-- CART -->
 <div id="cart" class="fixed inset-y-0 left-0 w-full md:w-96 bg-white shadow-xl transform -translate-x-full transition z-50 flex flex-col">
   <div class="p-4 bg-brand-dark text-white flex justify-between">
-    <span class="font-bold">سلة الطلبات</span>
+    <span class="font-bold">سلة الطلب</span>
     <button onclick="toggleCart()"><i class="fa-solid fa-xmark"></i></button>
   </div>
 
-  <div id="cart-items" class="flex-1 p-4 space-y-3 text-sm"></div>
+  <div id="cart-items" class="flex-1 p-4 space-y-2 text-sm"></div>
 
   <div class="p-4 border-t">
     <div class="flex justify-between font-bold mb-3">
@@ -71,118 +71,116 @@ tailwind.config = {
 
 <!-- CHECKOUT -->
 <div id="checkout" class="fixed inset-0 bg-black/50 hidden z-50 flex items-center justify-center">
-<div class="bg-white rounded-xl w-full max-w-md p-6 space-y-4">
+  <div class="bg-white rounded-xl w-full max-w-md p-6 space-y-4">
 
-<h2 class="font-bold text-xl text-center">تأكيد الطلب</h2>
+    <h2 class="font-bold text-xl text-center">تأكيد الطلب</h2>
 
-<input id="name" placeholder="الاسم الكامل" class="w-full border p-3 rounded">
-<input id="phone" placeholder="رقم الهاتف" class="w-full border p-3 rounded">
-<input id="address" placeholder="الولاية / العنوان" class="w-full border p-3 rounded">
+    <input id="name" class="w-full border p-3 rounded" placeholder="الاسم الكامل">
+    <input id="phone" class="w-full border p-3 rounded" placeholder="رقم الهاتف">
+    <input id="address" class="w-full border p-3 rounded" placeholder="الولاية / العنوان">
 
-<!-- PAYMENT METHODS -->
-<div class="space-y-3">
-<label class="font-bold">طريقة الدفع</label>
+    <!-- PAYMENT METHODS -->
+    <div class="space-y-3">
+      <label class="font-bold">طريقة الدفع</label>
 
-<label class="flex items-center gap-2 border p-3 rounded cursor-pointer">
-<input type="radio" name="pay" value="whatsapp" checked>
-<span>💬 واتساب</span>
-</label>
+      <label class="flex items-center gap-2 border p-3 rounded cursor-pointer">
+        <input type="radio" name="pay" value="whatsapp" checked>
+        <span>💬 واتساب</span>
+      </label>
 
-<label class="flex items-center gap-2 border p-3 rounded cursor-pointer">
-<input type="radio" name="pay" value="form">
-<span>📩 نموذج الموقع</span>
-</label>
+      <label class="flex items-center gap-2 border p-3 rounded cursor-pointer">
+        <input type="radio" name="pay" value="form">
+        <span>📩 نموذج الموقع</span>
+      </label>
 
-<label class="border p-3 rounded cursor-pointer space-y-2">
-<div class="flex gap-2 items-center">
-<input type="radio" name="pay" value="chargily">
-<span class="font-bold">💳 الدفع الإلكتروني (CIB / الذهبية)</span>
-</div>
-<div class="flex gap-4">
-<img class="h-8" src="https://upload.wikimedia.org/wikipedia/commons/2/2a/CIB_Algeria_logo.png">
-<img class="h-8" src="https://upload.wikimedia.org/wikipedia/commons/8/88/Edahabia_card_logo.png">
-</div>
-</label>
-</div>
+      <label class="border p-3 rounded cursor-pointer space-y-2">
+        <div class="flex items-center gap-2">
+          <input type="radio" name="pay" value="chargily">
+          <span class="font-bold">💳 الدفع الإلكتروني</span>
+        </div>
+        <div class="flex gap-4 mt-2">
+          <img class="h-8" alt="CIB" src="https://merchbydz.com/assets/cib.png">
+          <img class="h-8" alt="EDAHABIA" src="https://merchbydz.com/assets/edahabia.png">
+        </div>
+      </label>
+    </div>
 
-<button onclick="confirmOrder()" class="w-full bg-brand-primary text-white py-3 rounded-xl font-bold">
-تأكيد
-</button>
-
-</div>
+    <button onclick="confirmOrder()" class="w-full bg-brand-primary text-white py-3 rounded-xl font-bold">
+      تأكيد
+    </button>
+  </div>
 </div>
 
 <script>
-let products=[], cart=[];
+let products = [];
+let cart = [];
 
 // LOAD PRODUCTS
 fetch('/content/products.json')
-.then(r=>r.json())
-.then(d=>{
-products=d.items;
-document.getElementById('products-grid').innerHTML=
-products.map(p=>`
-<div class="bg-white p-4 rounded shadow">
-<img src="${p.image}" class="h-40 w-full object-cover rounded">
-<h3 class="font-bold mt-2">${p.title}</h3>
-<p class="text-sm text-gray-500">${p.description}</p>
-<div class="flex justify-between items-center mt-3">
-<span class="font-bold">${p.price} د.ج</span>
-<button onclick="addToCart('${p.id}')" class="bg-brand-dark text-white px-3 py-1 rounded">+</button>
-</div>
-</div>
-`).join('');
+.then(r => r.json())
+.then(d => {
+  products = d.items;
+  document.getElementById('products-grid').innerHTML =
+    products.map(p => `
+      <div class="bg-white p-4 rounded shadow">
+        <img src="${p.image}" class="h-40 w-full object-cover rounded">
+        <h3 class="font-bold mt-2">${p.title}</h3>
+        <p class="text-sm text-gray-500">${p.description}</p>
+        <div class="flex justify-between items-center mt-3">
+          <span class="font-bold">${p.price} د.ج</span>
+          <button onclick="addToCart('${p.id}')" class="bg-brand-dark text-white px-3 py-1 rounded">+</button>
+        </div>
+      </div>
+    `).join('');
 });
 
 function addToCart(id){
-cart.push(products.find(p=>p.id===id));
-updateCart();
-toggleCart(true);
+  cart.push(products.find(p => p.id === id));
+  updateCart();
+  toggleCart(true);
 }
 
 function updateCart(){
-document.getElementById('cart-badge').textContent=cart.length;
-document.getElementById('cart-badge').style.opacity=cart.length?1:0;
-document.getElementById('cart-total').textContent=
-cart.reduce((s,i)=>s+i.price,0)+' د.ج';
-document.getElementById('cart-items').innerHTML=
-cart.map(i=>`<div>${i.title} - ${i.price} د.ج</div>`).join('');
+  document.getElementById('cart-badge').textContent = cart.length;
+  document.getElementById('cart-badge').style.opacity = cart.length ? 1 : 0;
+  document.getElementById('cart-total').textContent =
+    cart.reduce((s,i)=>s+i.price,0) + ' د.ج';
+  document.getElementById('cart-items').innerHTML =
+    cart.map(i => `<div>${i.title} - ${i.price} د.ج</div>`).join('');
 }
 
 function toggleCart(force){
-const c=document.getElementById('cart');
-if(force) c.classList.remove('-translate-x-full');
-else c.classList.toggle('-translate-x-full');
+  const c = document.getElementById('cart');
+  if(force) c.classList.remove('-translate-x-full');
+  else c.classList.toggle('-translate-x-full');
 }
 
 function openCheckout(){
-if(!cart.length) return alert('السلة فارغة');
-toggleCart();
-document.getElementById('checkout').classList.remove('hidden');
+  if(!cart.length) return alert('السلة فارغة');
+  toggleCart();
+  document.getElementById('checkout').classList.remove('hidden');
 }
 
 async function confirmOrder(){
-const method=document.querySelector('input[name="pay"]:checked').value;
-const total=cart.reduce((s,i)=>s+i.price,0);
+  const method = document.querySelector('input[name="pay"]:checked').value;
+  const total = cart.reduce((s,i)=>s+i.price,0);
 
-// CHARGILY PAYMENT
-if(method==="chargily"){
-const r=await fetch('/.netlify/functions/chargily-payment',{
-method:'POST',
-headers:{'Content-Type':'application/json'},
-body:JSON.stringify({ total })   // ✅ FIXED HERE
-});
-const d=await r.json();
-if(d.checkout_url){
-window.location.href=d.checkout_url;
-}else{
-alert('فشل إنشاء عملية الدفع');
-}
-return;
-}
+  if(method === "chargily"){
+    const r = await fetch('/.netlify/functions/chargily-payment', {
+      method: 'POST',
+      headers: { 'Content-Type':'application/json' },
+      body: JSON.stringify({ total })
+    });
+    const d = await r.json();
+    if(d.checkout_url){
+      window.location.href = d.checkout_url;
+    } else {
+      alert('فشل إنشاء عملية الدفع');
+    }
+    return;
+  }
 
-// OTHER METHODS (SIMULATION)
-alert('تم إرسال الطلب بالطريقة المختارة');
+  alert('تم إرسال الطلب بالطريقة المختارة');
 }
 </script>
 
